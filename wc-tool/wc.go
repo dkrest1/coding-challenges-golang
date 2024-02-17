@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 
@@ -19,10 +20,11 @@ func byteCount(filename string) (int64, error) {
 	return fileSize, nil
 }
 
-func countLine(filename string) (int, error) {
+func lineCount(filename string) (int, error) {
 	file, err := os.Open(filename)
 	
 	if err != nil {
+		fmt.Println("Error:", err)
 		return 0, err
 	}
 
@@ -41,4 +43,30 @@ func countLine(filename string) (int, error) {
 	}
 
 	return lineCount, nil
+}
+
+func wordCount(filename string) (int, error) {
+	file, err :=  os.Open(filename)
+
+	if err != nil {
+		fmt.Println("Error:", err)
+		return 0, err
+	}
+
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	wordCount := 0
+
+	for scanner.Scan() {
+		words := strings.Fields(scanner.Text())
+		wordCount += len(words)
+	}
+
+	if err := scanner.Err(); err != nil {
+		// fmt.Println('Error', err)
+		return 0, err
+	}
+
+	return wordCount, nil
 }
