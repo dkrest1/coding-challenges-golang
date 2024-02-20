@@ -4,4 +4,4 @@ This coding challeges was from [coding challenges](https://codingchallenges.fyi/
 
 ## Challenges
 
-1. [Write your own WC tool]()
+1. [Write your own WC tool](https://github.com/dkrest1/coding-challenges-golang/tree/main/wc-tool)
