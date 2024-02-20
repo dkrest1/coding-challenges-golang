@@ -16,13 +16,13 @@ Follow the steps in the challenge description to set up your development environ
 
 1. Count Bytes
 
-<sub>Directly</sub>
+>Directly
 
 ```bash
 go run main.go -c test.txt 
 ```
 
-<!-- Executable -->
+>Executable
 
 ```bash
 ./bin/ccwc -c test.txt
@@ -36,13 +36,13 @@ go run main.go -c test.txt
 
 2. Count Lines
 
-<!-- Directly -->
+>Directly
 
 ```bash
 go run main.go -l test.txt 
 ```
 
-<!-- Executable -->
+>Executable
 
 ```bash
 ./bin/ccwc -l test.txt
@@ -56,13 +56,13 @@ go run main.go -l test.txt
 
 3. Count Words
 
-<!-- Directly -->
+>Directly
 
 ```bash
 go run main.go -w test.txt 
 ```
 
-<!-- Executable -->
+>Executable
 
 ```bash
 ./bin/ccwc -w test.txt
@@ -76,13 +76,13 @@ go run main.go -w test.txt
 
 4. Count Characters
 
-<!-- Directly -->
+>Directly
 
 ```bash
 go run main.go -m test.txt 
 ```
 
-<!-- Executable -->
+>Executable
 
 ```bash
 ./bin/ccwc -m test.txt
@@ -97,13 +97,13 @@ go run main.go -m test.txt
 
 5. Default Count:
 
-<!-- Directly -->
+>Directly
 
 ```bash
 go run main.go test.txt 
 ```
 
-<!-- Executable -->
+>Executable
 
 ```bash
 ./bin/ccwc test.txt
