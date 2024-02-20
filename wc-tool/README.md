@@ -16,7 +16,7 @@ Follow the steps in the challenge description to set up your development environ
 
 1. Count Bytes
 
-<!-- Directly -->
+<sub>Directly</sub>
 
 ```bash
 go run main.go -c test.txt 
@@ -130,15 +130,9 @@ go run main.go test.txt
 
 ## Run Test
 
-To test the `wc` tool, follow these steps:
+To test the `wc-tool` tool, follow these steps:
 
-1. **Build the ccwc executable:**
-
-    ```bash
-    make build
-    ```
-
-2. **Run Tests:**
+1. **Run Tests:**
 
     ```bash
     make test
@@ -146,10 +140,14 @@ To test the `wc` tool, follow these steps:
 
     This will execute the tests and provide verbose output.
 
-3. **Clean Up:**
+## Clean Up Executable
 
-    Optionally, you can clean up the generated binary:
+To clean up the executable file, follow these steps:
+
+1. **Clean Executable:**
 
     ```bash
     make clean
     ```
+
+    This will delete the bin folder and the executable file.
