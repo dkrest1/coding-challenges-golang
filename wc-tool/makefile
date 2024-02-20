@@ -1,6 +1,8 @@
-build: 
+build:
+	go build -o ccwc .
 
 clean:
+	rm -rf ccwc
 
-test: 
-
+test:
+	pwd && go test -v
