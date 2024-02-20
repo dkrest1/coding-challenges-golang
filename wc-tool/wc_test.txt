@@ -1,7 +1,0 @@
-This is a sample text file for testing purposes.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque euismod, arcu sit amet fermentum vestibulum, mauris leo facilisis risus, in tincidunt leo velit nec nunc. Integer ac odio vel libero varius fermentum. Duis bibendum turpis vel ex ullamcorper, eu facilisis odio convallis. Sed eu scelerisque nunc. Curabitur eleifend, ipsum at cursus laoreet, lectus mauris auctor odio, nec vulputate lectus tortor eu mauris. Ut fringilla, orci a dictum efficitur, ex dolor vehicula purus, eu fringilla nisi mauris et neque. In hac habitasse platea dictumst. Proin euismod semper arcu ac laoreet.
-
-Suspendisse ut sollicitudin elit. Vestibulum cursus consectetur nisi, vel sodales purus volutpat vel. Vivamus eleifend justo auctor, bibendum quam non, efficitur turpis. Nulla facilisi. Suspendisse potenti. Ut eu facilisis orci. Vivamus accumsan vel libero eget tristique. Donec ut dui aliquet, imperdiet nisl at, venenatis velit.
-
-This is the end of the sample text.

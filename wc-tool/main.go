@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 )
@@ -16,15 +17,33 @@ func main() {
 	countChars := flag.Bool("m", false, "Count characters")
 	flag.Parse()
 
-	filename := flag.Arg(0)
-	fmt.Println(filename)
+	var filename *os.File
 
-	// If no filename is provided, read from standard input
-	if filename == "" {
-		// Implement reading from standard input if needed
-		fmt.Println("Reading from standard input is not yet implemented.")
-		return
+	if flag.NArg() == 0 {
+		stat, err := os.Stdin.Stat()
+		if err != nil {
+			log.Println("Error:", err)
+			return
+		}
+
+		if (stat.Mode() & os.ModeCharDevice) == 0 {
+			filename = os.Stdin
+		} else {
+			log.Println("Reading from standard input is not yet implemented.")
+			return
+		}
+	} else {
+		filenamePath := flag.Arg(0)
+		file, err := os.Open(filenamePath)
+		if err != nil {
+			log.Println("Error:", err)
+			return
+		}
+		defer file.Close()
+
+		filename = file
 	}
+
 
 	// Check if at least one count option is provided
 	if !(*countBytes || *countLines || *countWords || *countChars) {
@@ -37,44 +56,44 @@ func main() {
 	if *countBytes {
 		bytesCount, err := byteCount(filename)
 		if err != nil {
-			fmt.Println("Error counting bytes:", err)
+			log.Println("Error counting bytes:", err)
 			return
 		}
-		fmt.Printf("%8d %s\n", bytesCount, filename)
+		fmt.Printf("%8d %v\n", bytesCount, filename.Name())
 	}
 
 	if *countLines {
 		linesCount, err := lineCount(filename)
 		if err != nil {
-			fmt.Println("Error counting lines:", err)
+			log.Println("Error counting lines:", err)
 			return
 		}
-		fmt.Printf("%8d %s\n", linesCount, filename)
+		fmt.Printf("%8d %v\n", linesCount, filename.Name())
 	}
 
 	if *countWords {
 		wordsCount, err := wordCount(filename)
 		if err != nil {
-			fmt.Println("Error counting words:", err)
+			log.Println("Error counting words:", err)
 			return
 		}
-		fmt.Printf("%8d %s\n", wordsCount, filename)
+		fmt.Printf("%8d %v\n", wordsCount, filename.Name())
 	}
 
 	if *countChars {
 		charsCount, err := charCount(filename)
 		if err != nil {
-			fmt.Println("Error counting characters:", err)
+			log.Println("Error counting characters:", err)
 			return
 		}
-		fmt.Printf("%8d %s\n", charsCount, filename)
+		fmt.Printf("%8d %v\n", charsCount, filename.Name())
 	}
 }
 
-func byteCount(filename string) (int64, error) {
-	fileInfo, err := os.Stat(filename)
+func byteCount(filename *os.File) (int64, error) {
+	fileInfo, err := filename.Stat()
 	if err != nil {
-		fmt.Println("Error:", err)
+		log.Println("Error:", err)
 		return 0, err
 	}
 
@@ -83,18 +102,9 @@ func byteCount(filename string) (int64, error) {
 	return fileSize, nil
 }
 
-func lineCount(filename string) (int, error) {
-	file, err := os.Open(filename)
-	
-	if err != nil {
-		fmt.Println("Error:", err)
-		return 0, err
-	}
-
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-
+func lineCount(filename *os.File) (int, error) {
+	filename.Seek(0, 0) 
+	scanner := bufio.NewScanner(filename)
 	lineCount := 0
 
 	for scanner.Scan() {
@@ -102,24 +112,18 @@ func lineCount(filename string) (int, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
+		log.Println("Error:", err)
 		return 0, err
 	}
 
 	return lineCount, nil
 }
 
-func wordCount(filename string) (int, error) {
-	file, err :=  os.Open(filename)
-
-	if err != nil {
-		fmt.Println("Error:", err)
-		return 0, err
-	}
-
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+func wordCount(filename *os.File) (int, error) {
+	filename.Seek(0, 0) 
+	scanner := bufio.NewScanner(filename)
 	wordCount := 0
+
 
 	for scanner.Scan() {
 		words := strings.Fields(scanner.Text())
@@ -127,24 +131,16 @@ func wordCount(filename string) (int, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		fmt.Println("Error", err)
+		log.Println("Error", err)
 		return 0, err
 	}
 
 	return wordCount, nil
 }
 
-func charCount(filename string) (int, error) {
-	file, err := os.Open(filename)
-
-	if err != nil {
-		fmt.Println("Error:", err)
-		return 0, err
-	}
-
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+func charCount(filename *os.File) (int, error) {
+	filename.Seek(0, 0) 
+	scanner := bufio.NewScanner(filename)
 	charCount := 0
 
 	for scanner.Scan() {
@@ -153,7 +149,7 @@ func charCount(filename string) (int, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		fmt.Println("Error: ", err)
+		log.Println("Error: ", err)
 		return 0, err
 	}
 
