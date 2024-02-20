@@ -1,8 +1,8 @@
 build:
-	go build -o ccwc .
+	go build -o bin/ccwc .
 
 clean:
-	rm -rf ccwc
+	rm -rf bin/ccwc
 
 test:
-	pwd && go test -v
+	pwd && go test wc_test -v

@@ -79,4 +79,30 @@ cat test.txt | ccwc -l
 
 ## Getting Started
 
-Follow the steps in the challenge description to set up your development environment and start coding! Test your solution with the provided test.txt file and enjoy the journey of building your own wc tool.
+Follow the steps in the challenge description to set up your development environment and start coding! 
+
+## Run Test
+
+To test the `ccwc` tool, follow these steps:
+
+1. **Build the ccwc executable:**
+
+    ```bash
+    make build
+    ```
+
+2. **Run Tests:**
+
+    ```bash
+    make test
+    ```
+
+    This will execute the tests and provide verbose output.
+
+3. **Clean Up:**
+
+    Optionally, you can clean up the generated binary:
+
+    ```bash
+    make clean
+    ```
